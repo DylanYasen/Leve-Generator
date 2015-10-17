@@ -38,7 +38,8 @@ public class Room : MonoBehaviour
         _height = height;
 
         // set collider
-        _collider.size = new Vector2(width + 1, height + 1);
+        // larger gap
+        _collider.size = new Vector2(width + 3, height + 3);
 
         // set cells
         cells = new Cell[width, height];

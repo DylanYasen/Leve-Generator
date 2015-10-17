@@ -48,7 +48,7 @@ public class DungeonGenerator : MonoBehaviour
         }
         #endregion
 
-        #region Remove Physics & Small Rooms
+        #region Remove Small Rooms
         float widthMean = widthSum / roomAmount;
         float heightMean = heightSum / roomAmount;
 
@@ -57,7 +57,6 @@ public class DungeonGenerator : MonoBehaviour
         {
             //rooms[i].RemovePhysics();
             rooms[i].Reset();
-
 
             if (rooms[i].Width < widthMean || rooms[i].Height < heightMean)
             {
@@ -350,8 +349,8 @@ public class DungeonGenerator : MonoBehaviour
                         {
                             // go other way
                             startPoint.Set(room1.Position.x, room1.rectMinY);
-                            turnPoint.Set(room1.Position.x, room0.Position.y - yDistance);
-                            endPoint.Set(room0.Position.x, room0.Position.y);
+                            turnPoint.Set(room1.Position.x, room1.Position.y - yDistance);
+                            endPoint.Set(room0.rectMinX, room0.Position.y);
 
                             Debug.Log("go other way");
                         }
@@ -376,10 +375,13 @@ public class DungeonGenerator : MonoBehaviour
                 Debug.Log("##Lshape created hallway from " + startPoint + " to " + turnPoint + " to " + endPoint + " between " + room0.name + "  " + room1.name);
             }
             #endregion
-
-
         }
 
+        #endregion
+
+        #region Remove Physics
+        for (int i = 0; i < rooms.Count; i++)
+            rooms[i].RemovePhysics();
         #endregion
 
         //#region Create Tiles
