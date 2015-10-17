@@ -12,11 +12,20 @@ public class Room : MonoBehaviour
     public float rectMaxX { get { return Rect.x + Rect.width / 2; } }
     public float rectMinY { get { return Rect.y - Rect.height / 2; } }
     public float rectMaxY { get { return Rect.y + Rect.height / 2; } }
+    public Collider2D Collider { get { return _collider; } }
 
     private int _width;
     private int _height;
     private int _id;
     private Rect _rect;
+    private BoxCollider2D _collider;
+
+    private Cell[,] cells;
+
+    void Awake()
+    {
+        _collider = gameObject.GetComponent<BoxCollider2D>();
+    }
 
     public void SetPosition(Vector2 pos)
     {
@@ -28,8 +37,11 @@ public class Room : MonoBehaviour
         _width = width;
         _height = height;
 
-        gameObject.GetComponent<BoxCollider2D>().size = new Vector2(width + 1, height + 1);
+        // set collider
+        _collider.size = new Vector2(width + 1, height + 1);
 
+        // set cells
+        cells = new Cell[width, height];
     }
 
     void OnDrawGizmos()
@@ -42,6 +54,11 @@ public class Room : MonoBehaviour
         Gizmos.DrawWireCube(transform.position, new Vector2(Width, Height));
     }
 
+    public void Reset()
+    {
+        _rect = new Rect(Position.x, Position.y, _width, _height);
+    }
+
     public void RemovePhysics()
     {
         _rect = new Rect(Position.x, Position.y, _width, _height);
@@ -50,4 +67,17 @@ public class Room : MonoBehaviour
         DestroyImmediate(gameObject.GetComponent<BoxCollider2D>());
     }
 
+    public void Fill()
+    {
+        Vector2 pos = Vector2.zero;
+
+        for (int i = 0; i < cells.GetLength(0); i++)
+        {
+            for (int j = 0; j < cells.GetLength(1); j++)
+            {
+                pos.Set(rectMinX + 0.5f + i, rectMinY + 0.5f + j);
+                GameObject obj = Instantiate(Resources.Load<GameObject>("Floor"), pos, Quaternion.identity) as GameObject;
+            }
+        }
+    }
 }
