@@ -32,7 +32,7 @@ public class DungeonGenerator : MonoBehaviour
 	{
 		#region Create Random Size & Pos Rooms 
 		int counter = 0;
-		int roomAmount = 50;
+		int roomAmount = 30;
 		int widthSum = 0;
 		int heightSum = 0;
 		while (counter < roomAmount) {
@@ -342,14 +342,14 @@ public class DungeonGenerator : MonoBehaviour
 		#endregion
 
 		#region Create Tiles
-		//for (int i = 0; i < rooms.Count; i++) {
-		//	rooms [i].Fill ();
-		//	yield return new WaitForSeconds (0.2f);
-		//}
-		for (int i = 0; i < _hallways.Count; i++) {
-			_hallways [i].Fill ();
+		for (int i = 0; i < rooms.Count; i++) {
+			rooms [i].Fill ();
 			yield return new WaitForSeconds (0.2f);
 		}
+		//for (int i = 0; i < _hallways.Count; i++) {
+		//	_hallways [i].Fill ();
+		//	yield return new WaitForSeconds (0.2f);
+		//}
 		#endregion
 	}
 
@@ -412,10 +412,13 @@ public class DungeonGenerator : MonoBehaviour
 
 	public Room CreateRandRoom ()
 	{
-		int randWidth = Random.Range (1, 15);
-		int randHeight = Random.Range (1, 15);
-		Vector2 pos = Grid.instance.RandCellInRange (Grid.width - randWidth, Grid.height - randHeight).position;
+		// keep it odd
+		int randWidth = Random.Range (2, 7);
+		randWidth += randWidth + 1;
+		int randHeight = Random.Range (2, 7);
+		randHeight += randHeight + 1;
 
+		Vector2 pos = Grid.instance.RandCellInRange (randWidth / 2 + 1, Grid.width - randWidth / 2 - 1, randHeight / 2 + 1, Grid.height - randHeight / 2 - 1).position;
 		GameObject roomObj = Instantiate (roomPrefab, pos, Quaternion.identity) as GameObject;
 		Room room = roomObj.GetComponent<Room> ();
 

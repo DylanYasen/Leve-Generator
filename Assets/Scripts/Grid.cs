@@ -3,8 +3,8 @@ using System.Collections;
 
 public class Grid : MonoBehaviour
 {
-	public static int width = 50;
-	public static int height = 50;
+	public static int width = 80;
+	public static int height = 80;
 	public Cell[,] cells;
 
 	public static Grid instance{ get; private set; }
@@ -27,10 +27,21 @@ public class Grid : MonoBehaviour
 		}
 	}
 
-	public Cell RandCellInRange (int maxX, int maxY)
+	void OnDrawGizmos ()
 	{
-		int x = Random.Range (0, maxX);
-		int y = Random.Range (0, maxY);
+		Gizmos.color = Color.white;
+
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				Gizmos.DrawWireCube (new Vector2 (i, j), Vector2.one);
+			}
+		}
+	}
+
+	public Cell RandCellInRange (int minX, int maxX, int minY, int maxY)
+	{
+		int x = Random.Range (minX, maxX);
+		int y = Random.Range (minY, maxY);
 	
 		return  cells [x, y];
 	}
@@ -43,6 +54,7 @@ public class Cell
 	public int yIndex{ get; private set; }
 
 	public Vector2 position{ get; private set; }
+
 
 	public Cell (int x, int y)
 	{

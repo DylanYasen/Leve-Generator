@@ -1,12 +1,13 @@
 fileFormatVersion: 2
 guid: 617f4b97d62353f42ba388fbadee9cf2
-timeCreated: 1444514829
+timeCreated: 1454300884
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: GlowingDungeonTiles_0
-    21300002: GlowingDungeonTiles_1
+    21300002: Tile
     21300004: GlowingDungeonTiles_2
+    21300006: Wall
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -20,7 +21,7 @@ TextureImporter:
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
-    heightScale: .25
+    heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
@@ -45,7 +46,7 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: .5, y: .5}
+  spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
@@ -53,17 +54,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: GlowingDungeonTiles_0
-      rect:
-        serializedVersion: 2
-        x: 1161
-        y: 887
-        width: 8
-        height: 13
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: GlowingDungeonTiles_1
+    - name: Tile
       rect:
         serializedVersion: 2
         x: 905
@@ -71,18 +62,31 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: GlowingDungeonTiles_2
+      outline:
+      - - {x: -50, y: 50}
+        - {x: -50, y: -50}
+        - {x: 50, y: -50}
+        - {x: 50, y: 50}
+    - name: Wall
       rect:
         serializedVersion: 2
-        x: 1041
-        y: 666
-        width: 102
-        height: 102
+        x: 1185
+        y: 549
+        width: 100
+        height: 100
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -50, y: 50}
+        - {x: -50, y: -50}
+        - {x: -23, y: -50}
+        - {x: -22, y: -44}
+        - {x: -22, y: 15}
+        - {x: -23, y: 50}
+    outline: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

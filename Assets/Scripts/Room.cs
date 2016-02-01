@@ -30,7 +30,7 @@ public class Room : MonoBehaviour
 	private BoxCollider2D _collider;
 	private Rigidbody2D _body2d;
 
-	private Cell[,] cells;
+	//	private Cell[,] cells;
 
 	void Awake ()
 	{
@@ -50,10 +50,12 @@ public class Room : MonoBehaviour
 
 		// set collider
 		// larger gap
-		_collider.size = new Vector2 (width + 3, height + 3);
+		_collider.size = new Vector2 (width, height);
 
 		// set cells
-		cells = new Cell[width, height];
+//		cells = new Cell[width, height];
+
+		Debug.Log ("created ```````");
 	}
 
 	void OnTriggerStay2D (Collider2D other)
@@ -65,10 +67,18 @@ public class Room : MonoBehaviour
 		float yDiff = Mathf.Abs (yDir);
 
 		// go the larger differ axises
-		if (xDiff > yDiff)
+		if (xDiff > yDiff) {
+			
+			if (_collider.bounds.min.x <= 0 || _collider.bounds.max.x >= Grid.width - 1)
+				return;
+
 			transform.Translate (-Mathf.Sign (xDir) * Vector2.right);
-		else
+		} else {
+			if (_collider.bounds.min.y <= 0 || _collider.bounds.max.y >= Grid.height - 1)
+				return;
+			
 			transform.Translate (-Mathf.Sign (yDir) * Vector2.up);
+		}
 	}
 
 	void OnDrawGizmos ()
@@ -89,19 +99,21 @@ public class Room : MonoBehaviour
 	public void RemovePhysics ()
 	{
 		_rect = new Rect (Position.x, Position.y, _width, _height);
-
 		DestroyImmediate (gameObject.GetComponent<Rigidbody2D> ());
 		DestroyImmediate (gameObject.GetComponent<BoxCollider2D> ());
 	}
 
 	public void Fill ()
 	{
-		Vector2 pos = Vector2.zero;
-
-		for (int i = 0; i < cells.GetLength (0); i++) {
-			for (int j = 0; j < cells.GetLength (1); j++) {
-				pos.Set (rectMinX + 0.5f + i, rectMinY + 0.5f + j);
-				GameObject obj = Instantiate (Resources.Load<GameObject> ("Floor"), pos, Quaternion.identity) as GameObject;
+		Vector2 pos = new Vector2 (rectMinX + 0.5f, rectMinY + 0.5f);
+		//pos.x += 0.5f;
+		//pos.y += 0.5f;
+		Vector2 tempPos = pos;
+		for (int i = 0; i < Width; i++) {
+			tempPos.x = pos.x + i;
+			for (int j = 0; j < Height; j++) {
+				tempPos.y = pos.y + j;
+				GameObject obj = Instantiate (Resources.Load<GameObject> ("Floor"), tempPos, Quaternion.identity) as GameObject;
 			}
 		}
 	}
