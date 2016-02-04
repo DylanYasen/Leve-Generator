@@ -3,8 +3,8 @@ using System.Collections;
 
 public class Grid : MonoBehaviour
 {
-	public static int width = 80;
-	public static int height = 80;
+	public static int width = 100;
+	public static int height = 100;
 	public Cell[,] cells;
 
 	public static Grid instance{ get; private set; }
