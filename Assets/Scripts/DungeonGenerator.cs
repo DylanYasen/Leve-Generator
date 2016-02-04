@@ -113,8 +113,8 @@ public class DungeonGenerator : MonoBehaviour
 
 			#region Close in X-Axis
 			// mid x point is inside of both rects
-			if (room0.Position.x + xMidPointDistance <= room0.rectMaxX
-			    && room1.Position.x + xMidPointDistance <= room1.rectMaxX) {
+			if (room0.Position.x + xMidPointDistance < room0.rectMaxX// removed equal sign ==> 避免房间刚好快要重叠，防止做路径时麻烦，因为路径瓦片可能会刚好在网格线上
+			    && room1.Position.x + xMidPointDistance < room1.rectMaxX) {
 				Vector2 startPoint = Vector2.zero;
 				Vector2 endPoint = Vector2.zero;
 
@@ -155,8 +155,8 @@ public class DungeonGenerator : MonoBehaviour
 
             #region Close In Y-Axis
             // mid y point is inside of both rects
-            else if (room0.Position.y + yMidPointDistance <= room0.rectMaxY
-			                  && room1.Position.y + yMidPointDistance <= room1.rectMaxY) {
+            else if (room0.Position.y + yMidPointDistance < room0.rectMaxY
+			                  && room1.Position.y + yMidPointDistance < room1.rectMaxY) {
 				Vector2 startPoint = Vector2.zero;
 				Vector2 endPoint = Vector2.zero;
 
