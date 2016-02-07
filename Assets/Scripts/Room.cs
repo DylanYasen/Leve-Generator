@@ -51,11 +51,6 @@ public class Room : MonoBehaviour
         // set collider
         // larger gap
         _collider.size = new Vector2(width + 1, height + 1);
-
-        // set cells
-        //		cells = new Cell[width, height];
-
-        Debug.Log("created ```````");
     }
 
     void OnTriggerStay2D(Collider2D other)
@@ -120,7 +115,9 @@ public class Room : MonoBehaviour
             for (int j = 0; j < Height; j++)
             {
                 tempPos.y = pos.y + j;
-                GameObject obj = Instantiate(Resources.Load<GameObject>("Floor"), tempPos, Quaternion.identity) as GameObject;
+
+                TileManager.instance.CreateTileOnGrid(Resources.Load<GameObject>("Floor"), tempPos);
+                //GameObject obj = Instantiate(), tempPos, Quaternion.identity) as GameObject;
             }
         }
     }

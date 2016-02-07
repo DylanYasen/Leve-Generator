@@ -25,7 +25,6 @@ public class DungeonGenerator : MonoBehaviour
     {
         rooms = new List<Room>();
 
-
         StartCoroutine(Create());
     }
 
@@ -636,7 +635,8 @@ public class HallWay
             else if (yDir > 0)
                 pos.Set(startPos.x, startPos.y + 0.5f + j);
 
-            GameObject obj = MonoBehaviour.Instantiate(floorPrefab, pos, Quaternion.identity) as GameObject;
+            //GameObject obj = MonoBehaviour.Instantiate(floorPrefab, pos, Quaternion.identity) as GameObject;
+            TileManager.instance.CreateTileOnGrid(floorPrefab, pos);
         }
     }
 }
@@ -701,7 +701,8 @@ public class LHallWay : HallWay
             else if (yDir > 0)
                 pos.Set(startPos.x, startPos.y + 0.5f + j);
 
-            GameObject obj = MonoBehaviour.Instantiate(floorPrefab, pos, Quaternion.identity) as GameObject;
+            //GameObject obj = MonoBehaviour.Instantiate(floorPrefab, pos, Quaternion.identity) as GameObject;
+            TileManager.instance.CreateTileOnGrid(floorPrefab, pos);
         }
 
         xDir = endPos.x - turnPos.x;
@@ -720,7 +721,8 @@ public class LHallWay : HallWay
             else if (yDir > 0)
                 pos.Set(turnPos.x, turnPos.y + 1 + j);
 
-            GameObject obj = MonoBehaviour.Instantiate(floorPrefab, pos, Quaternion.identity) as GameObject;
+            //GameObject obj = MonoBehaviour.Instantiate(floorPrefab, pos, Quaternion.identity) as GameObject;
+            TileManager.instance.CreateTileOnGrid(floorPrefab, pos);
         }
     }
 }
