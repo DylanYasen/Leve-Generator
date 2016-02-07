@@ -5,6 +5,8 @@ public class TileManager : MonoBehaviour
 {
     public static TileManager instance { get; private set; }
 
+    public Sprite[] wallSprites;
+
     void Awake()
     {
         instance = this;

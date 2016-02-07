@@ -1,26 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Room : MonoBehaviour
 {
     public Vector2 Position { get { return transform.position; } }
-
     public int Width { get { return _width; } }
-
     public int Height { get { return _height; } }
 
     public int ID { get { return _id; } set { _id = value; } }
 
     public Rect Rect { get { return _rect; } }
-
     public float rectMinX { get { return Rect.x - Rect.width / 2; } }
-
     public float rectMaxX { get { return Rect.x + Rect.width / 2; } }
-
     public float rectMinY { get { return Rect.y - Rect.height / 2; } }
-
     public float rectMaxY { get { return Rect.y + Rect.height / 2; } }
-
     public Collider2D Collider { get { return _collider; } }
 
     private int _width;
@@ -31,6 +25,7 @@ public class Room : MonoBehaviour
     private Rigidbody2D _body2d;
 
     //	private Cell[,] cells;
+    private List<HallWay> _hallways = new List<HallWay>();
 
     void Awake()
     {
@@ -116,7 +111,57 @@ public class Room : MonoBehaviour
             {
                 tempPos.y = pos.y + j;
 
-                TileManager.instance.CreateTileOnGrid(Resources.Load<GameObject>("Floor"), tempPos);
+                // left side
+                if (i == 0)
+                {
+                    // bottom left
+                    if (j == 0)
+                    {
+                        TileManager.instance.CreateTileOnGrid(Resources.Load<GameObject>("Wall_SW"), tempPos);
+                    }
+                    // top left
+                    else if (j == Height - 1)
+                    {
+                        TileManager.instance.CreateTileOnGrid(Resources.Load<GameObject>("Wall_NW"), tempPos);
+                    }
+                    else
+                    {
+                        TileManager.instance.CreateTileOnGrid(Resources.Load<GameObject>("Wall_W"), tempPos);
+                    }
+                }
+                // right side
+                else if (i == Width - 1)
+                {
+                    // bottom left
+                    if (j == 0)
+                    {
+                        TileManager.instance.CreateTileOnGrid(Resources.Load<GameObject>("Wall_SE"), tempPos);
+                    }
+                    // top left
+                    else if (j == Height - 1)
+                    {
+                        TileManager.instance.CreateTileOnGrid(Resources.Load<GameObject>("Wall_NE"), tempPos);
+                    }
+                    else
+                    {
+                        TileManager.instance.CreateTileOnGrid(Resources.Load<GameObject>("Wall_E"), tempPos);
+                    }
+                }
+                // top side
+                else if (j == Height - 1)
+                {
+                    TileManager.instance.CreateTileOnGrid(Resources.Load<GameObject>("Wall_N"), tempPos);
+                }
+                // bottom
+                else if (j == 0)
+                {
+                    TileManager.instance.CreateTileOnGrid(Resources.Load<GameObject>("Wall_S"), tempPos);
+                }
+
+                else
+                    TileManager.instance.CreateTileOnGrid(Resources.Load<GameObject>("Floor"), tempPos);
+
+
                 //GameObject obj = Instantiate(), tempPos, Quaternion.identity) as GameObject;
             }
         }

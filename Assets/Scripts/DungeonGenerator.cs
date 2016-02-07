@@ -693,13 +693,22 @@ public class LHallWay : HallWay
 
             // direction of the hall way
             if (xDir < 0)
+            {
                 pos.Set(startPos.x - 0.5f - j, startPos.y);
+
+            }
             else if (xDir > 0)
+            {
                 pos.Set(startPos.x + 0.5f + j, startPos.y);
+            }
             else if (yDir < 0)
+            {
                 pos.Set(startPos.x, startPos.y - 0.5f - j);
+            }
             else if (yDir > 0)
+            {
                 pos.Set(startPos.x, startPos.y + 0.5f + j);
+            }
 
             //GameObject obj = MonoBehaviour.Instantiate(floorPrefab, pos, Quaternion.identity) as GameObject;
             TileManager.instance.CreateTileOnGrid(floorPrefab, pos);
@@ -710,7 +719,6 @@ public class LHallWay : HallWay
 
         for (int j = 0; j < cellCount2; j++)
         {
-
             // direction of the hall way
             if (xDir < 0)
                 pos.Set(turnPos.x - 1 - j, turnPos.y);
