@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
 
 public class Room : MonoBehaviour
 {
@@ -22,6 +24,9 @@ public class Room : MonoBehaviour
 	public float rectMaxY { get { return Rect.y + Rect.height / 2; } }
 
 	public Collider2D Collider { get { return _collider; } }
+
+	private List<HallWay> hallways = new List<HallWay> ();
+
 
 	private int _width;
 	private int _height;
@@ -101,6 +106,11 @@ public class Room : MonoBehaviour
 		_rect = new Rect (Position.x, Position.y, _width, _height);
 		DestroyImmediate (gameObject.GetComponent<Rigidbody2D> ());
 		DestroyImmediate (gameObject.GetComponent<BoxCollider2D> ());
+	}
+
+	public void AddHallWay (HallWay hallway)
+	{
+		
 	}
 
 	public void Fill ()

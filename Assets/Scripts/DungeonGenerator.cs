@@ -149,7 +149,9 @@ public class DungeonGenerator : MonoBehaviour
 				#endregion
 
 				// create vertical line
-				_hallways.Add (new HallWay (startPoint, endPoint, room0, room1));
+				HallWay hallway = new HallWay (startPoint, endPoint, room0, room1);
+				_hallways.Add (hallway);
+				room0.AddHallWay (hallway);
 				Debug.Log ("##CloseXAxis created hallway from " + startPoint + " to " + endPoint + " between " + room0.name + "  " + room1.name);
 			}
 
@@ -189,7 +191,10 @@ public class DungeonGenerator : MonoBehaviour
 				}
 
 				// create vertical line
-				_hallways.Add (new HallWay (startPoint, endPoint, room0, room1));
+				HallWay hallway = new HallWay (startPoint, endPoint, room0, room1);
+				_hallways.Add (hallway);
+				room0.AddHallWay (hallway);
+
 				Debug.Log ("##CloseYAxis created hallway from " + startPoint + " to " + endPoint + " between " + room0.name + "  " + room1.name);
 			}
             #endregion
@@ -328,7 +333,10 @@ public class DungeonGenerator : MonoBehaviour
 				}
 
 				// create vertical line
-				_hallways.Add (new LHallWay (startPoint, turnPoint, endPoint, room0, room1));
+				LHallWay hallway = new LHallWay (startPoint, turnPoint, endPoint, room0, room1);
+				_hallways.Add (hallway);
+				room0.AddHallWay (hallway);
+
 				Debug.Log ("##Lshape created hallway from " + startPoint + " to " + turnPoint + " to " + endPoint + " between " + room0.name + "  " + room1.name);
 			}
 			#endregion
